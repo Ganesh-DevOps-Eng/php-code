@@ -1,27 +1,52 @@
-<?php
-  ob_start();
-  require_once('includes/load.php');
-  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
-?>
-<?php include_once('layouts/header.php'); ?>
-<div class="login-page">
-    <div class="text-center">
-       <h1>Login Panel</h1>
-       <h4>Inventory Management System</h4>
-     </div>
-     <?php echo display_msg($msg); ?>
-      <form method="post" action="auth.php" class="clearfix">
-        <div class="form-group">
-              <label for="username" class="control-label">Username</label>
-              <input type="name" class="form-control" name="username" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <label for="Password" class="control-label">Password</label>
-            <input type="password" name= "password" class="form-control" placeholder="Password">
-        </div>
-        <div class="form-group">
-                <button type="submit" class="btn btn-danger" style="border-radius:0%">Login</button>
-        </div>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PHP Login System</title>
+</head>
+<body>
+    <h1>PHP Login System</h1>
+
+    <?php
+    session_start();
+
+    // Check if the user is already authenticated
+    if (isset($_SESSION['user_id'])) {
+        echo "Welcome, " . $_SESSION['user_id'] . "!<br>";
+        echo '<a href="logout.php">Logout</a>';
+    } else {
+        // Display the login form
+        if (isset($_POST['login'])) {
+            // Replace this with your actual user authentication logic
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+
+            // For demonstration purposes, we are using a hard-coded user
+            $validUser = ($username === 'demo' && $password === 'password');
+
+            if ($validUser) {
+                $_SESSION['user_id'] = $username;
+                echo "Login successful. Welcome, " . $_SESSION['user_id'] . "!<br>";
+                echo '<a href="logout.php">Logout</a>';
+            } else {
+                echo "Invalid username or password. Please try again.<br>";
+            }
+        }
+    }
+    ?>
+
+    <form method="POST" action="">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required><br>
+
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required><br>
+
+        <input type="submit" name="login" value="Login">
     </form>
-</div>
-<?php include_once('layouts/footer.php'); ?>
+
+    <br>
+
+    <!-- SSO Login Button (Sample) -->
+    <a href="sso-login.php">Login with SSO</a>
+</body>
+</html>
