@@ -33,5 +33,10 @@ if (!$samlAuth->isAuthenticated()) {
     $username = $samlAuth->getAttributes()['NameID'][0];
     // Store the user's information or perform further actions
     // Redirect the user to your application's home page or other appropriate page
-    header('Location: /your-home-page.php');
+    //header('Location: /your-home-page.php');
+    // After successful SSO login
+    $_SESSION['sso_login'] = true;
+
+    // Redirect to the successful SSO login page
+    header('Location: successful-sso-login.php');
 }
