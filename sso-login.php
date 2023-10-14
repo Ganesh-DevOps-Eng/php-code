@@ -4,10 +4,10 @@ require_once 'vendor/autoload.php'; // Include the OneLogin toolkit
 $azureADSettings = array(
     'strict' => true,
     'sp' => array(
-        'entityId' => 'your-sp-entity-id', // Replace with your Service Provider Entity ID
+        'entityId' => 'https://matelliocorp-eb-env.eba-vwb8qadf.us-east-1.elasticbeanstalk.com/remote/saml/metadata/', // Your Service Provider Entity ID
         'assertionConsumerService' => array(
-            'url' => 'https://your-app-url/sso-login.php', // Replace with your application's SSO callback URL
-            'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
+            'url' => 'https://matelliocorp-eb-env.eba-vwb8qadf.us-east-1.elasticbeanstalk.com/remote/saml/login/', // Your application's SSO callback URL
+            'binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
         ),
         'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
         'x509cert' => '', // Your SP x509 certificate (leave empty if not used)
